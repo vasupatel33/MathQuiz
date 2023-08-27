@@ -32,6 +32,8 @@ public class GamePlayManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI GameOverScore;
 
+    [SerializeField] private Animator SettingPanelAnim;
+
     AudioManager audioManager;
 
     bool sliderValue;
@@ -116,23 +118,30 @@ public class GamePlayManager : MonoBehaviour
     public void SettingBtnPausePanel()
     {
         audioManager.PlaySound(audioManager.clickSound);
-        sliderValue = false;
         settingPanel.SetActive(true);
+        SettingPanelAnim.Play("SettingPanel");
+        sliderValue = false;
     }
     public void BackBtnSettingPanel()
     {
         audioManager.PlaySound(audioManager.clickSound);
+        SettingPanelAnim.Play("SettingPanelClose");
+        StartCoroutine(WaitForSettingPanelClose());
+    }
+    IEnumerator WaitForSettingPanelClose()
+    {
+        yield return new WaitForSeconds(1f);
         settingPanel.SetActive(false);
     }
     public void CloseButtonPausePanel()
     {
         audioManager.PlaySound(audioManager.clickSound);
         PausePanelAnim.Play("PausePanelClose");
-        StartCoroutine(WaitForPanelClose());
+        StartCoroutine(WaitForPausePanelClose());
         sliderValue = true;
         //   Time.timeScale = 1;
     }
-    IEnumerator WaitForPanelClose() 
+    IEnumerator WaitForPausePanelClose() 
     {
         yield return new WaitForSeconds(1f);
         pausePanel.SetActive(false);
@@ -140,8 +149,10 @@ public class GamePlayManager : MonoBehaviour
     public void ResumeButtonPausePanel()
     {
         audioManager.PlaySound(audioManager.clickSound);
+        PausePanelAnim.Play("PausePanelClose");
+        StartCoroutine(WaitForPausePanelClose());
         sliderValue = true;
-        pausePanel.SetActive(false);
+        //pausePanel.SetActive(false);
     }
     public void RestartButtonPausePanel()
     {
