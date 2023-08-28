@@ -159,7 +159,10 @@ public class GamePlayManager : MonoBehaviour
         audioManager.PlaySound(audioManager.clickSound);
         sliderValue = true;
         //SliderImage.fillAmount += 0.3f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SecondPanel();
+        score.text = 0.ToString();
+        scoreValue = 0;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pausePanel.SetActive(false);
     }
     public void HomeButtonPausePanel()
@@ -202,6 +205,8 @@ public class GamePlayManager : MonoBehaviour
         audioManager.PlaySound(audioManager.clickSound);
         SliderFlag = true;
         //Time.timeScale = 1;
+        score.text = 0.ToString();
+        scoreValue = 0;
         GameOverPanel.SetActive(false);
         secondPanel.SetActive(true);
     }
