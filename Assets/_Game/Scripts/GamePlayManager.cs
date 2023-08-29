@@ -54,13 +54,17 @@ public class GamePlayManager : MonoBehaviour
 
     bool LoadingPanelOpen;
 
+    [SerializeField] AudioClip MusicClip, clickClip, GameoverClip, CorrectAnsClip;
+
+    [SerializeField] Button MusicBtn, SoundBtn;
+    [SerializeField] Sprite OffSprite, OnSprite;
     void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         //audioManager = GameObject.FindObjectOfType<AudioManager>();
-        //SliderImage.fillAmount = 1;
+        MusicSet();
+        SoundSet();
         score.text = 0.ToString();
-        
     }
 
     void Update()
@@ -95,7 +99,8 @@ public class GamePlayManager : MonoBehaviour
 
     public void BackBtnClickedFirstPanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SceneManager.LoadScene("MainMenu");
     }
     //private float pausedFillAmount;
@@ -103,7 +108,8 @@ public class GamePlayManager : MonoBehaviour
 
     public void PauseBtnSecondPanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         pausePanel.SetActive(true);
         PausePanelAnim.Play("PausePanel");
         SliderImage.fillAmount += Time.deltaTime * 0.1f;
@@ -117,14 +123,16 @@ public class GamePlayManager : MonoBehaviour
     }
     public void SettingBtnPausePanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         settingPanel.SetActive(true);
         SettingPanelAnim.Play("SettingPanel");
         sliderValue = false;
     }
     public void BackBtnSettingPanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SettingPanelAnim.Play("SettingPanelClose");
         StartCoroutine(WaitForSettingPanelClose());
     }
@@ -135,7 +143,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void CloseButtonPausePanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         PausePanelAnim.Play("PausePanelClose");
         StartCoroutine(WaitForPausePanelClose());
         sliderValue = true;
@@ -148,7 +157,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ResumeButtonPausePanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         PausePanelAnim.Play("PausePanelClose");
         StartCoroutine(WaitForPausePanelClose());
         sliderValue = true;
@@ -156,7 +166,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartButtonPausePanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         sliderValue = true;
         //SliderImage.fillAmount += 0.3f;
         SecondPanel();
@@ -167,7 +178,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void HomeButtonPausePanel()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         sliderValue = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         firstPanel.SetActive(true);
@@ -180,7 +192,8 @@ public class GamePlayManager : MonoBehaviour
 
     public void ArithmeticBtnClicked(int value)
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         selectedField = value;
         secondPanel.SetActive(true);
         firstPanel.SetActive(false);
@@ -189,7 +202,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartBtnLoadingOver()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         score.text = 0.ToString();
         scoreValue = 0;
         //SliderFlag = true;
@@ -202,7 +216,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartButton()
     {
-        audioManager.PlaySound(audioManager.clickSound);
+        //audioManager.PlaySound(audioManager.clickSound);
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SliderFlag = true;
         //Time.timeScale = 1;
         score.text = 0.ToString();
@@ -212,6 +227,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ExitButtonGameOverPanel()
     {
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SceneManager.LoadScene("MainMenu");
         //Time.timeScale = 1;
         score.text = 0.ToString();
@@ -342,40 +358,32 @@ public class GamePlayManager : MonoBehaviour
             }
             else
             {
-                FourValue[i].text = GeneratedValue[counter].ToString();//counter==0 
+                FourValue[i].text = GeneratedValue[counter].ToString();
                 counter++;
             }
         }
-        //secondPanelAnim.SetBool("Score", false);
     }
 
    
     
     public void SetAnswer(TextMeshProUGUI text)
     {
-        //secondPanelAnim.SetBool("Score", false);
-
         if (text.text == ans.ToString())
         {
-            audioManager.PlaySound(audioManager.CorrectAnsSound);
+            //audioManager.PlaySound(audioManager.CorrectAnsSound);
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(CorrectAnsClip);
             Debug.Log("Answer is correcttt");
             SecondPanel();
             scoreValue++;
             score.text = scoreValue.ToString();
             secondPanelAnim.SetTrigger("ScoreAnim");
-            //ScoreAnim++;
-            //if (!ScoreAnim)
-            //{
-            //    secondPanelAnim.SetBool("Score", true);
-            //    ScoreAnim = true;
-            //}
         }
         else
         {
-            audioManager.PlaySound(audioManager.gameOverSound);
+            //audioManager.PlaySound(audioManager.gameOverSound);
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(GameoverClip);
             //GameObject.Find("Loading").transform.GetChild(0).gameObject.SetActive(false);
             SliderFlag = false;
-            //Time.timeScale = 0;
             Debug.Log("Wrong Answer");
             GameOverPanel.SetActive(true);
             GameOverScore.text = score.text;
@@ -387,4 +395,66 @@ public class GamePlayManager : MonoBehaviour
     {
         SliderFlag = false;
     }
+
+    public void MusicManagement()
+    {
+        if (CommonScript.instance.musicPlaying == true)
+        {
+            CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().mute = true;
+            MusicBtn.GetComponent<Image>().sprite = OffSprite;
+            CommonScript.instance.musicPlaying = false;
+        }
+        else
+        {
+            CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().mute = false;
+            MusicBtn.GetComponent<Image>().sprite = OnSprite;
+            CommonScript.instance.musicPlaying = true;
+        }
+    }
+    public void MusicSet()
+    {
+        CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().clip = MusicClip;
+        CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
+        if (CommonScript.instance.musicPlaying == true)
+        {
+            CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().mute = false;
+            MusicBtn.GetComponent<Image>().sprite = OnSprite;
+        }
+        else
+        {
+            CommonScript.instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().mute = true;
+            MusicBtn.GetComponent<Image>().sprite = OffSprite;
+        }
+    }
+    public void SoundManagement()
+    {
+        if (CommonScript.instance.soundPlaying == true)
+        {
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().mute = true;
+            SoundBtn.GetComponent<Image>().sprite = OffSprite;
+            CommonScript.instance.soundPlaying = false;
+            Debug.Log("Sound True");
+        }
+        else
+        {
+            SoundBtn.GetComponent<Image>().sprite = OnSprite;
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().mute = false;
+            CommonScript.instance.soundPlaying = true;
+            Debug.Log("Sound false");
+        }
+    }
+    public void SoundSet()
+    {
+        if (CommonScript.instance.soundPlaying == true)
+        {
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().mute = false;
+            SoundBtn.GetComponent<Image>().sprite = OnSprite;
+        }
+        else
+        {
+            CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().mute = true;
+            SoundBtn.GetComponent<Image>().sprite = OffSprite;
+        }
+    }
+
 }
