@@ -5,9 +5,10 @@ public class CommonScript : MonoBehaviour
     public bool musicPlaying, soundPlaying;
     public static CommonScript instance;
 
-    void Start()
+
+    private void Awake()
     {
-        if(!instance)
+        if (!instance)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -17,8 +18,5 @@ public class CommonScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    void Update()
-    {
-
-    }
+  
 }

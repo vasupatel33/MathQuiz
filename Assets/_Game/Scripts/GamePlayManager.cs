@@ -10,11 +10,7 @@ public class GamePlayManager : MonoBehaviour
 {
     [SerializeField] GameObject pausePanel, firstPanel, secondPanel, settingPanel, GameOverPanel, loadingOverPanel;
 
-    //[SerializeField] Animator animator;
-
     [SerializeField] private Image SliderImage;
-
-    //[SerializeField] private Slider slider;
 
     [SerializeField] private TextMeshProUGUI LeftText, rightText, OperatorText;
 
@@ -88,8 +84,6 @@ public class GamePlayManager : MonoBehaviour
                         loadingOverPanel.SetActive(true);
                     }
                     LoadingPanelOpen = true;
-
-                    //SliderImage.fillAmount = 0.1f;
                 }
 
             }
@@ -99,7 +93,6 @@ public class GamePlayManager : MonoBehaviour
 
     public void BackBtnClickedFirstPanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SceneManager.LoadScene("MainMenu");
     }
@@ -108,7 +101,6 @@ public class GamePlayManager : MonoBehaviour
 
     public void PauseBtnSecondPanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         pausePanel.SetActive(true);
         PausePanelAnim.Play("PausePanel");
@@ -123,7 +115,6 @@ public class GamePlayManager : MonoBehaviour
     }
     public void SettingBtnPausePanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         settingPanel.SetActive(true);
         SettingPanelAnim.Play("SettingPanel");
@@ -131,7 +122,6 @@ public class GamePlayManager : MonoBehaviour
     }
     public void BackBtnSettingPanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SettingPanelAnim.Play("SettingPanelClose");
         StartCoroutine(WaitForSettingPanelClose());
@@ -143,12 +133,10 @@ public class GamePlayManager : MonoBehaviour
     }
     public void CloseButtonPausePanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         PausePanelAnim.Play("PausePanelClose");
         StartCoroutine(WaitForPausePanelClose());
         sliderValue = true;
-        //   Time.timeScale = 1;
     }
     IEnumerator WaitForPausePanelClose() 
     {
@@ -157,7 +145,6 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ResumeButtonPausePanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         PausePanelAnim.Play("PausePanelClose");
         StartCoroutine(WaitForPausePanelClose());
@@ -166,19 +153,16 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartButtonPausePanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         sliderValue = true;
         //SliderImage.fillAmount += 0.3f;
         SecondPanel();
         score.text = 0.ToString();
         scoreValue = 0;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pausePanel.SetActive(false);
     }
     public void HomeButtonPausePanel()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         sliderValue = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -186,13 +170,10 @@ public class GamePlayManager : MonoBehaviour
         secondPanel.SetActive(false);
         pausePanel.SetActive(false);
         settingPanel.SetActive(false);
-        //ArithmeticBtnClicked();
-        //GeneratedValue.Clear();
     }
 
     public void ArithmeticBtnClicked(int value)
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         selectedField = value;
         secondPanel.SetActive(true);
@@ -202,12 +183,9 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartBtnLoadingOver()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         score.text = 0.ToString();
         scoreValue = 0;
-        //SliderFlag = true;
-        //Time.timeScale = 1;
         firstPanel.SetActive(true);
         secondPanel.SetActive(false);
         loadingOverPanel.SetActive(false);
@@ -216,10 +194,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartButton()
     {
-        //audioManager.PlaySound(audioManager.clickSound);
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SliderFlag = true;
-        //Time.timeScale = 1;
         score.text = 0.ToString();
         scoreValue = 0;
         GameOverPanel.SetActive(false);
@@ -229,18 +205,14 @@ public class GamePlayManager : MonoBehaviour
     {
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SceneManager.LoadScene("MainMenu");
-        //Time.timeScale = 1;
         score.text = 0.ToString();
         scoreValue = 0;
     }
 
     public void SecondPanel()
     {
-        //ScoreAnim = false;
         SliderImage.fillAmount = 1;
         SliderFlag = true;
-        //Debug.Log("Panel open = " + selectedField);
-        //Debug.Log("Operator = " + OperatorText);
 
         switch (selectedField)
         {
@@ -281,10 +253,7 @@ public class GamePlayManager : MonoBehaviour
                 LeftText.text = Value1.ToString();
                 rightText.text = Value2.ToString();
                 ans = Value1 / Value2;
-                //val = (float)System.Math.Round(ans, 2);
                 Debug.Log("val is = " + val);
-
-                //ans = val;
                 GeneratedAnswers();
                 Debug.Log("Ans = " + ans);
                 flag = true;
@@ -323,7 +292,6 @@ public class GamePlayManager : MonoBehaviour
                     }
                     float randomval = (int)System.Math.Abs(randomValue);
                     randomValue = randomval;
-                    //flag = false;
                 }
                 else
                 {
@@ -334,7 +302,6 @@ public class GamePlayManager : MonoBehaviour
             } while (GeneratedValue.Contains(randomValue) || ans == randomValue);
             GeneratedValue.Add(randomValue);
         }
-        //Shuffle();
         SetFourBtnValue();
     }
     void SetFourBtnValue()

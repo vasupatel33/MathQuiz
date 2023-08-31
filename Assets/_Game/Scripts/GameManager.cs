@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button MusicBtn, SoundBtn;
     [SerializeField] Sprite OffSprite, OnSprite;
 
+    
     [SerializeField] AudioClip MusicClip, clickClip, GameoverClip, CorrectAnsClip;
 
     float sliderValue = 0.3f;
