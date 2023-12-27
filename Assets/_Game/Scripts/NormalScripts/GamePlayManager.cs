@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using GoogleMobileAds.Samples;
 //using static UnityEngine.ParticleSystem;
 
 public class GamePlayManager : MonoBehaviour
@@ -78,7 +79,6 @@ public class GamePlayManager : MonoBehaviour
                 else
                 {
                     flag = true;
-                    Debug.Log("else workingg");
                     if (LoadingPanelOpen == false)
                     {
                         loadingOverPanel.SetActive(true);
@@ -163,6 +163,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void HomeButtonPausePanel()
     {
+        GoogleMobileAdsController.Instance.DestroyBannerAdd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         sliderValue = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -174,6 +175,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void ArithmeticBtnClicked(int value)
     {
+        GoogleMobileAdsController.Instance.ShowBannerAdd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         selectedField = value;
         secondPanel.SetActive(true);
@@ -183,6 +185,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartBtnLoadingOver()
     {
+        GoogleMobileAdsController.Instance.DestroyBannerAdd();
+        GoogleMobileAdsController.Instance.ShowRewardAd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         score.text = 0.ToString();
         scoreValue = 0;
@@ -194,6 +198,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartButton()
     {
+        GoogleMobileAdsController.Instance.DestroyBannerAdd();
+        GoogleMobileAdsController.Instance.ShowInterstitialAdd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SliderFlag = true;
         score.text = 0.ToString();
@@ -203,6 +209,8 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ExitButtonGameOverPanel()
     {
+        GoogleMobileAdsController.Instance.DestroyBannerAdd();
+        GoogleMobileAdsController.Instance.ShowInterstitialAdd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         SceneManager.LoadScene("MainMenu");
         score.text = 0.ToString();
