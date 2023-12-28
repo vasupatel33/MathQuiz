@@ -9,13 +9,15 @@ using GoogleMobileAds.Samples;
 
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] GameObject pausePanel, firstPanel, secondPanel, settingPanel, GameOverPanel, loadingOverPanel;
+    public static GamePlayManager Instance;
+
+    public GameObject pausePanel, firstPanel, secondPanel, settingPanel, GameOverPanel, loadingOverPanel;
 
     [SerializeField] private Image SliderImage;
 
     [SerializeField] private TextMeshProUGUI LeftText, rightText, OperatorText;
 
-    [SerializeField] private TextMeshProUGUI score;
+    public TextMeshProUGUI score;
 
     [SerializeField] private List<float> GeneratedValue;
 
@@ -45,7 +47,7 @@ public class GamePlayManager : MonoBehaviour
 
     float val;
 
-    int scoreValue=0;
+    public int scoreValue=0;
 
     bool SliderFlag=false;
 
@@ -55,6 +57,11 @@ public class GamePlayManager : MonoBehaviour
 
     [SerializeField] Button MusicBtn, SoundBtn;
     [SerializeField] Sprite OffSprite, OnSprite;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -178,19 +185,27 @@ public class GamePlayManager : MonoBehaviour
         GoogleMobileAdsController.Instance.ShowBannerAdd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         selectedField = value;
+        PlayerPrefs.SetInt("ArithmeticValue",value);
+        Debug.Log("Arithmetic val = "+val);
         secondPanel.SetActive(true);
         firstPanel.SetActive(false);
         sliderValue = true;
         SecondPanel();
     }
-    public void RestartBtnLoadingOver()
+    public void ResumeButtonLoadingOverPanel()
     {
         GoogleMobileAdsController.Instance.DestroyBannerAdd();
         GoogleMobileAdsController.Instance.ShowRewardAd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
+        
+    }
+    public void RestartBtnLoadingOver()
+    {
+        GoogleMobileAdsController.Instance.DestroyBannerAdd();
+        //GoogleMobileAdsController.Instance.ShowRewardAd();
+        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
         score.text = 0.ToString();
         scoreValue = 0;
-        firstPanel.SetActive(true);
         secondPanel.SetActive(false);
         loadingOverPanel.SetActive(false);
         settingPanel.SetActive(false);
@@ -206,6 +221,20 @@ public class GamePlayManager : MonoBehaviour
         scoreValue = 0;
         GameOverPanel.SetActive(false);
         secondPanel.SetActive(true);
+    }
+    public void rewaredSuccess()
+    {
+        scoreValue = PlayerPrefs.GetInt("scorePref");
+        Debug.Log("after reward score = " + scoreValue);
+       score.text = scoreValue.ToString();
+        int arithValue = PlayerPrefs.GetInt("ArithmeticValue");
+        Debug.Log("after reward arith value = " + arithValue);
+
+        ArithmeticBtnClicked(arithValue);
+        secondPanel.SetActive(true);
+        loadingOverPanel.SetActive(false);
+        settingPanel.SetActive(false);
+        GameOverPanel.SetActive(false);
     }
     public void ExitButtonGameOverPanel()
     {
@@ -350,6 +379,7 @@ public class GamePlayManager : MonoBehaviour
             Debug.Log("Answer is correcttt");
             SecondPanel();
             scoreValue++;
+            PlayerPrefs.SetInt("scorePref",scoreValue);
             score.text = scoreValue.ToString();
             secondPanelAnim.SetTrigger("ScoreAnim");
         }

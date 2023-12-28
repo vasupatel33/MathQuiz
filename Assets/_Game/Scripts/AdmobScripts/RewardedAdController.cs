@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Samples;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace GoogleMobileAds.Sample
 {
@@ -28,6 +29,18 @@ namespace GoogleMobileAds.Sample
 #endif
 
         private RewardedAd _rewardedAd;
+
+
+        private bool rewardvideoloaded;
+        public delegate void OnVideoSuccessReward();
+        public static OnVideoSuccessReward onVideoSuccessReward;
+
+        public static RewardedAdController instance;
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         /// <summary>
         /// Loads the ad.
@@ -84,9 +97,11 @@ namespace GoogleMobileAds.Sample
                 Debug.Log("Showing rewarded ad.");
                 _rewardedAd.Show((Reward reward) =>
                 {
-                    Debug.Log(String.Format("Rewarded ad granted a reward: {0} {1}",
-                                            reward.Amount,
-                                            reward.Type));
+                    Debug.Log("Player is rewarded with his score");
+                    if (onVideoSuccessReward != null)
+                    {
+                        onVideoSuccessReward();
+                    }
                 });
             }
             else

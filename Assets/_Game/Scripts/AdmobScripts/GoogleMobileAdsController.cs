@@ -94,7 +94,7 @@ namespace GoogleMobileAds.Samples
                     }
                 }
 
-                Debug.Log("Google Mobile Ads initialization complete.");
+                Debug.Log("Google Mobile Ads  initialization complete.");
                 _isInitialized = true;
                 rewardAdController.LoadAd();
                 interstrialAdController.LoadAd();

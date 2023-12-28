@@ -4312,6 +4312,7 @@ MonoBehaviour:
   PausePanelAnim: {fileID: 956670243}
   GameOverScore: {fileID: 636171394}
   SettingPanelAnim: {fileID: 1095307328}
+  scoreValue: 0
   MusicClip: {fileID: 8300000, guid: 4138076dc0cd52e4bb32edb579438f84, type: 3}
   clickClip: {fileID: 8300000, guid: c2ad0c496c150cc4bb2f357d4f597569, type: 3}
   GameoverClip: {fileID: 8300000, guid: 4b45aef20cae2504689c7e662fa80741, type: 3}
@@ -5356,7 +5357,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1425497673}
         m_TargetAssemblyTypeName: GamePlayManager, Assembly-CSharp
-        m_MethodName: RestartBtnLoadingOver
+        m_MethodName: ResumeButtonLoadingOverPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
