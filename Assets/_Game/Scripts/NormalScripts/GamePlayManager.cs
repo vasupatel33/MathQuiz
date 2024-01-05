@@ -201,15 +201,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void RestartBtnLoadingOver()
     {
-        GoogleMobileAdsController.Instance.DestroyBannerAdd();
-        //GoogleMobileAdsController.Instance.ShowRewardAd();
-        CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
-        score.text = 0.ToString();
-        scoreValue = 0;
-        secondPanel.SetActive(false);
-        loadingOverPanel.SetActive(false);
-        settingPanel.SetActive(false);
-        GameOverPanel.SetActive(false);
+        SceneManager.LoadScene(1);
     }
     public void RestartButton()
     {
