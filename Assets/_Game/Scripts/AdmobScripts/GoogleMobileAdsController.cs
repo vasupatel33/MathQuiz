@@ -26,8 +26,6 @@ namespace GoogleMobileAds.Samples
         {
             base.Awake();
         }
-        
-
 
         /// <summary>
         /// Initializes the MobileAds SDK

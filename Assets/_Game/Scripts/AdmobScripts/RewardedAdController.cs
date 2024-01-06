@@ -30,10 +30,9 @@ namespace GoogleMobileAds.Sample
 
         private RewardedAd _rewardedAd;
 
-
         private bool rewardvideoloaded;
-        public delegate void OnVideoSuccessReward();
-        public static OnVideoSuccessReward onVideoSuccessReward;
+        //public delegate void OnVideoSuccessReward();
+        //public static OnVideoSuccessReward onVideoSuccessReward;
 
         public static RewardedAdController instance;
 
@@ -98,10 +97,11 @@ namespace GoogleMobileAds.Sample
                 _rewardedAd.Show((Reward reward) =>
                 {
                     Debug.Log("Player is rewarded with his score");
-                    if (onVideoSuccessReward != null)
-                    {
-                        onVideoSuccessReward();
-                    }
+                    GamePlayManager.Instance.RewardSuccess();
+                    //if (onVideoSuccessReward != null)
+                    //{
+                    //    onVideoSuccessReward();
+                    //}
                 });
             }
             else

@@ -66,26 +66,26 @@ public class GameManager : MonoBehaviour
         settingPanel.SetActive(false);
         firstPanel.SetActive(true);
     }
-    public void rewaredAwared()
-    {
-        RewardedAdController.onVideoSuccessReward = null;
-        RewardedAdController.onVideoSuccessReward = OnSuccess;
-        RewardedAdController.instance.ShowAd();
-    }
-    void OnSuccess()
-    {
-        Debug.Log("my rewared one");
-    }
-    public void rewaredAwared2()
-    {
-        RewardedAdController.onVideoSuccessReward = null;
-        RewardedAdController.onVideoSuccessReward = OnSuccess2;
-        RewardedAdController.instance.ShowAd();
-    }
-    void OnSuccess2()
-    {
-        Debug.Log("my rewared two");
-    }
+    //public void rewaredAwared()
+    //{
+    //    RewardedAdController.onVideoSuccessReward = null;
+    //    RewardedAdController.onVideoSuccessReward = OnSuccess;
+    //    RewardedAdController.instance.ShowAd();
+    //}
+    //void OnSuccess()
+    //{
+    //    Debug.Log("my rewared one");
+    //}
+    //public void rewaredAwared2()
+    //{
+    //    RewardedAdController.onVideoSuccessReward = null;
+    //    RewardedAdController.onVideoSuccessReward = OnSuccess2;
+    //    RewardedAdController.instance.ShowAd();
+    //}
+    //void OnSuccess2()
+    //{
+    //    Debug.Log("my rewared two");
+    //}
     void Update()
     {
         if (playBtnClicked)

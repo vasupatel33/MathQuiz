@@ -194,6 +194,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ResumeButtonLoadingOverPanel()
     {
+        
         GoogleMobileAdsController.Instance.DestroyBannerAdd();
         GoogleMobileAdsController.Instance.ShowRewardAd();
         CommonScript.instance.gameObject.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(clickClip);
@@ -214,11 +215,11 @@ public class GamePlayManager : MonoBehaviour
         GameOverPanel.SetActive(false);
         secondPanel.SetActive(true);
     }
-    public void rewaredSuccess()
+    public void RewardSuccess()
     {
         scoreValue = PlayerPrefs.GetInt("scorePref");
         Debug.Log("after reward score = " + scoreValue);
-       score.text = scoreValue.ToString();
+        score.text = scoreValue.ToString();
         int arithValue = PlayerPrefs.GetInt("ArithmeticValue");
         Debug.Log("after reward arith value = " + arithValue);
 

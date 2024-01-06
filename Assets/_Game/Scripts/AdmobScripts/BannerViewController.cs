@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
+using GoogleMobileAds.Samples;
+using UnityEngine.SocialPlatforms.Impl;
+
 
 namespace GoogleMobileAds.Sample
 {
